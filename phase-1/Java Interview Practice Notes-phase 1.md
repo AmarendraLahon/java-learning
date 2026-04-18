@@ -295,4 +295,19 @@ Example:
 Integer a = null;
 int b = a; // NPE
 
+Q1. What problem did Java 8 solve in HashMap?
+Before Java 8, collisions were handled using linked lists, leading to O(n) worst-case time. Java 8 introduced treeification to convert buckets into trees, improving performance to O(log n).
+
+Q2. What is treeification in HashMap?
+Treeification is the process of converting a bucket from a linked list to a balanced tree when collisions exceed a threshold.
+
+Q3. When does HashMap convert a LinkedList into a tree?
+When the number of elements in a bucket exceeds 8 and the overall capacity is at least 64.
+
+Q4. Why not always use a tree instead of a linked list?
+Trees have higher overhead. For small data, linked lists are more efficient, so trees are used only when collisions are high.
+
+Q5. What happens if capacity < 64 but collisions exceed threshold?
+HashMap resizes (increases capacity) and rehashes entries instead of treeifying.
+
 **End of Document**
