@@ -310,4 +310,20 @@ Trees have higher overhead. For small data, linked lists are more efficient, so 
 Q5. What happens if capacity < 64 but collisions exceed threshold?
 HashMap resizes (increases capacity) and rehashes entries instead of treeifying.
 
+Q1. Difference between HashMap and LinkedHashMap?
+HashMap does not maintain order, while LinkedHashMap maintains insertion or access order using a doubly linked list.
+
+Q2. How does LinkedHashMap maintain order?
+It uses a doubly linked list of entries, maintaining references to previous and next nodes for predictable iteration.
+
+Q3. Types of ordering in LinkedHashMap?
+1. Insertion order
+2. Access order
+
+Q4. When to use LinkedHashMap?
+When order matters, such as LRU cache, logging, or predictable iteration.
+
+Q5. How to implement LRU cache using LinkedHashMap?
+Use access-order LinkedHashMap and override removeEldestEntry() to remove least recently used entries when capacity is exceeded.
+
 **End of Document**
