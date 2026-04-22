@@ -74,6 +74,19 @@
 
   * Can explain HashMap without notes?
 
+  🔹 OOP Deep Dive (2–3 Days)
+Day 1:
+Encapsulation (real use, not definition)
+Abstraction (interfaces vs abstract class)
+Real examples (service layer design)
+Day 2:
+Inheritance (when to use / avoid)
+Composition vs Inheritance (VERY IMPORTANT)
+Polymorphism (runtime vs compile-time)
+Day 3 (Optional but recommended):
+SOLID principles (intro level)
+Design thinking
+
 ---
 
 # 📅 Week 2: Multithreading & Concurrency
