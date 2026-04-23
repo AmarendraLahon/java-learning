@@ -326,4 +326,77 @@ When order matters, such as LRU cache, logging, or predictable iteration.
 Q5. How to implement LRU cache using LinkedHashMap?
 Use access-order LinkedHashMap and override removeEldestEntry() to remove least recently used entries when capacity is exceeded.
 
+Q1. Why is encapsulation important?
+Encapsulation protects internal state and enforces business rules through controlled access, ensuring objects remain in a valid state.
+
+Q2. Real-world example of abstraction?
+A messaging system where NotificationService interface has implementations like Email, SMS, etc., allowing flexibility without changing client code.
+
+Q3. Abstraction vs Encapsulation?
+Abstraction hides complexity and exposes behavior, while encapsulation hides data and protects internal state.
+
+Q4. Why use interfaces in service layer?
+Interfaces provide loose coupling, flexibility, and support multiple implementations, enabling better design and dependency injection.
+
+Q5. What is the risk of over-abstraction?
+It can make systems complex, harder to read, debug, and maintain due to unnecessary layers and indirection.
+
+Q1. What is the main problem with inheritance?
+Inheritance leads to tight coupling and rigid design. Changes in the parent class can impact all subclasses and make the system harder to modify.
+
+Q2. Why is composition preferred over inheritance?
+Composition provides loose coupling and flexibility, allowing behavior to change dynamically without affecting class hierarchy.
+
+Q3. Example where inheritance fails but composition works?
+Bird example: defining fly() in base class breaks subclasses like Ostrich. Composition allows only appropriate classes to implement flying behavior.
+
+Q4. Difference between IS-A and HAS-A?
+IS-A represents inheritance (Dog is an Animal), while HAS-A represents composition (Car has an Engine).
+
+Q5. Can inheritance and composition be combined?
+Yes. Use inheritance for common behavior and composition for flexible or optional behavior, such as using interfaces for capabilities.
+
+Q2. Can private methods be overridden?
+No, because private methods are not inherited and hence cannot be overridden.
+
+Q3. Difference between List and ArrayList reference?
+Reference type determines accessible methods. List allows only List methods (abstraction), while ArrayList allows implementation-specific methods.
+
+Q4. Why composition over inheritance?
+Composition provides loose coupling and flexibility, while inheritance leads to rigid and tightly coupled hierarchies.
+
+Q5. Static method behavior?
+Static methods are not overridden but hidden. They are resolved at compile time based on reference type.
+Output: A
+
+Q6. Abstract class vs Interface?
+Abstract class can have state and behavior; interface defines contract. Use abstract class for shared logic, interface for flexibility and multiple implementations.
+
+Q1. Why is Runnable preferred over Thread?
+Runnable separates task from thread, provides flexibility, and allows extending other classes.
+
+Q2. Difference between start() and run()?
+start() creates a new thread and executes run() concurrently, while run() executes in the current thread like a normal method call.
+
+Q3. Why is thread execution order unpredictable?
+Because thread scheduling is handled by JVM and OS, and threads execute independently and concurrently.
+
+Q1. Why is count++ not thread-safe?
+count++ is not thread-safe because it is a non-atomic operation involving read, modify, and write steps. Multiple threads can concurrently modify the same variable, leading to inconsistent results due to lost updates.
+
+Q2. What is the role of join()?
+join() ensures that one thread waits for another to complete execution, guaranteeing that results are consistent and complete before proceeding.
+
+Q1. Why does volatile not solve race conditions?
+volatile ensures visibility but not atomicity. Multiple threads can concurrently modify a variable, leading to inconsistent results.
+
+Q2. When to use volatile?
+volatile is used for status flags or signals, where visibility is required but no compound operations are involved.
+
+Q1. Why use unlock() in finally?
+To ensure the lock is always released, even if an exception occurs, preventing threads from being blocked indefinitely.
+
+Q2. How does tryLock() help prevent deadlock?
+tryLock() attempts to acquire a lock without waiting indefinitely, allowing threads to avoid circular wait conditions.
+
 **End of Document**
