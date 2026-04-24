@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Phase-2 Java Notes</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; background: #fafafa; }
+h2 { color: #333; }
+.controls { margin-bottom: 20px; }
+.controls button { padding: 10px 18px; font-size: 16px; margin-right: 8px; cursor: pointer; border: none; border-radius: 6px; }
+.btn-start { background: #4CAF50; color: white; }
+.btn-stop { background: #e53935; color: white; }
+.section-title { background: #1976D2; color: white; padding: 10px 16px; margin: 24px 0 8px 0; border-radius: 6px; font-size: 18px; font-weight: bold; }
+.topic { padding: 10px 16px; margin: 4px 0; border-left: 4px solid #4CAF50; background: white; border-radius: 4px; transition: background 0.3s; }
+.topic.active { background: #E8F5E9; border-left-color: #1976D2; }
+.topic .name { font-weight: bold; color: #2E7D32; font-size: 16px; }
+.topic .definition { color: #555; margin-top: 4px; font-size: 15px; }
+#status { margin-top: 10px; font-style: italic; color: #777; }
+</style>
+</head>
+<body>
+<h2>Java Interview Notes - Phase 2</h2>
+<div class="controls">
+    <button class="btn-start" onclick="startReading()">Start Reading</button>
+    <button class="btn-stop" onclick="stopReading()">Stop</button>
+</div>
+<div id="status"></div>
+<div id="content">
+
+<div class="section-title">Exception Handling</div>
+<div class="topic" data-name="Exception Hierarchy" data-def="Every exception in Java is an object. The root of the hierarchy is Throwable. Only objects that are instances of Throwable or its subclasses can be thrown or caught. Catch blocks must be arranged most-specific-first.">
+    <div class="name">Exception Hierarchy</div>
+    <div class="definition">Every exception in Java is an object. The root of the hierarchy is Throwable. Only objects that are instances of Throwable or its subclasses can be thrown or caught. Catch blocks must be arranged most-specific-first.</div>
+</div>
+<div class="topic" data-name="Checked vs Unchecked Exceptions" data-def="Checked exceptions extend Exception but NOT RuntimeException. The compiler forces you to handle them with try-catch or declare them with throws. Unchecked exceptions extend RuntimeException and the compiler does NOT enforce handling. They typically signal programming errors.">
+    <div class="name">Checked vs Unchecked Exceptions</div>
+    <div class="definition">Checked exceptions extend Exception but NOT RuntimeException. The compiler forces you to handle them with try-catch or declare them with throws. Unchecked exceptions extend RuntimeException and the compiler does NOT enforce handling. They typically signal programming errors.</div>
+</div>
+<div class="topic" data-name="Error vs Exception" data-def="Both extend Throwable. Error represents serious problems that an application should NOT try to catch, like OutOfMemoryError and StackOverflowError. Exception represents application-level problems that programs should handle. Error is unchecked even though it's not a RuntimeException.">
+    <div class="name">Error vs Exception</div>
+    <div class="definition">Both extend Throwable. Error represents serious problems that an application should NOT try to catch, like OutOfMemoryError and StackOverflowError. Exception represents application-level problems that programs should handle. Error is unchecked even though it's not a RuntimeException.</div>
+</div>
+<div class="topic" data-name="try catch finally" data-def="try is mandatory and must be followed by at least one catch OR finally or both. Multiple catch blocks must be ordered specific to general. At most one catch block runs per exception. finally runs regardless of whether an exception was thrown or caught, even after a return statement.">
+    <div class="name">try-catch-finally</div>
+    <div class="definition">try is mandatory and must be followed by at least one catch OR finally or both. Multiple catch blocks must be ordered specific to general. At most one catch block runs per exception. finally runs regardless of whether an exception was thrown or caught, even after a return statement.</div>
+</div>
+<div class="topic" data-name="throw vs throws" data-def="throw is a statement used inside a method body to explicitly raise an exception. throws is a declaration in the method signature indicating which checked exceptions the method may propagate. Subclass overrides can declare fewer or narrower checked exceptions, never broader ones.">
+    <div class="name">throw vs throws</div>
+    <div class="definition">throw is a statement used inside a method body to explicitly raise an exception. throws is a declaration in the method signature indicating which checked exceptions the method may propagate. Subclass overrides can declare fewer or narrower checked exceptions, never broader ones.</div>
+</div>
+<div class="topic" data-name="Custom Exception" data-def="Creating your own exception types makes error handling more expressive. Extend Exception for checked or RuntimeException for unchecked. Provide standard constructors and include meaningful context in the message. Name should end in Exception.">
+    <div class="name">Custom Exception</div>
+    <div class="definition">Creating your own exception types makes error handling more expressive. Extend Exception for checked or RuntimeException for unchecked. Provide standard constructors and include meaningful context in the message. Name should end in Exception.</div>
+</div>
+<div class="topic" data-name="try with resources" data-def="Automatically closes resources like files, streams, and database connections even if exceptions occur. The resource must implement AutoCloseable. Resources are closed in reverse order of declaration. If close throws while the try block already threw, the close-time exception is added as suppressed.">
+    <div class="name">try-with-resources</div>
+    <div class="definition">Automatically closes resources like files, streams, and database connections even if exceptions occur. The resource must implement AutoCloseable. Resources are closed in reverse order of declaration. If close throws while the try block already threw, the close-time exception is added as suppressed.</div>
+</div>
+<div class="topic" data-name="finally Block Behavior" data-def="finally is designed for cleanup. It always executes after normal completion, after caught or uncaught exceptions, and even after a return. It does NOT execute when System.exit is called, the JVM crashes, or a deadlock occurs. Never put return or throw inside finally as it masks bugs.">
+    <div class="name">finally Block Behavior</div>
+    <div class="definition">finally is designed for cleanup. It always executes after normal completion, after caught or uncaught exceptions, and even after a return. It does NOT execute when System.exit is called, the JVM crashes, or a deadlock occurs. Never put return or throw inside finally as it masks bugs.</div>
+</div>
+
+<div class="section-title">JVM Internals</div>
+<div class="topic" data-name="JVM Architecture" data-def="The JVM is the runtime engine that executes Java bytecode. Its three main subsystems are: Class Loader Subsystem for loading classes, Runtime Data Areas for memory management including Method Area, Heap and Stack, and the Execution Engine with Interpreter, JIT Compiler and Garbage Collector.">
+    <div class="name">JVM Architecture</div>
+    <div class="definition">The JVM is the runtime engine that executes Java bytecode. Its three main subsystems are: Class Loader Subsystem for loading classes, Runtime Data Areas for memory management including Method Area, Heap and Stack, and the Execution Engine with Interpreter, JIT Compiler and Garbage Collector.</div>
+</div>
+<div class="topic" data-name="ClassLoader" data-def="Class loaders load dot class files into the JVM on demand using lazy loading. Java uses a hierarchical parent-delegation model: Bootstrap loads core classes, Extension or Platform loads non-core platform modules, and Application loads user classes from the classpath. A class loader always delegates to its parent first.">
+    <div class="name">ClassLoader</div>
+    <div class="definition">Class loaders load .class files into the JVM on demand using lazy loading. Java uses a hierarchical parent-delegation model: Bootstrap loads core classes, Extension/Platform loads non-core platform modules, and Application loads user classes from the classpath. A class loader always delegates to its parent first.</div>
+</div>
+<div class="topic" data-name="Method Area and Metaspace" data-def="The Method Area is a JVM memory region shared across all threads that stores class-level metadata, method bytecode, runtime constant pool, and static variables. Pre-Java 8 it was called PermGen with fixed size. Java 8 plus it's called Metaspace and lives in native memory, auto-growing by default.">
+    <div class="name">Method Area / Metaspace</div>
+    <div class="definition">The Method Area is a JVM memory region shared across all threads that stores class-level metadata, method bytecode, runtime constant pool, and static variables. Pre-Java 8 it was called PermGen with fixed size. Java 8+ it's called Metaspace and lives in native memory, auto-growing by default.</div>
+</div>
+<div class="topic" data-name="JIT Compiler" data-def="The Just-In-Time compiler translates bytecode to native machine code at runtime, dramatically boosting performance after warmup. When a method crosses an invocation threshold of about 10,000 calls, JIT compiles it to native code. Optimizations include method inlining, escape analysis, dead code elimination, and loop unrolling.">
+    <div class="name">JIT Compiler</div>
+    <div class="definition">The Just-In-Time compiler translates bytecode to native machine code at runtime, dramatically boosting performance after warmup. When a method crosses an invocation threshold of about 10,000 calls, JIT compiles it to native code. Optimizations include method inlining, escape analysis, dead code elimination, and loop unrolling.</div>
+</div>
+<div class="topic" data-name="Execution Engine" data-def="Executes the bytecode loaded by the class loader. Has three main components: the Interpreter which reads bytecode one instruction at a time, the JIT Compiler which compiles hot methods to native code, and the Garbage Collector which reclaims memory. Also includes the Native Method Interface for calling C and C++ libraries.">
+    <div class="name">Execution Engine</div>
+    <div class="definition">Executes the bytecode loaded by the class loader. Has three main components: the Interpreter which reads bytecode one instruction at a time, the JIT Compiler which compiles hot methods to native code, and the Garbage Collector which reclaims memory. Also includes the Native Method Interface for calling C and C++ libraries.</div>
+</div>
+<div class="topic" data-name="Garbage Collection" data-def="GC frees memory held by objects no longer reachable from any GC root. Based on the generational hypothesis that most objects die young. New objects go to Eden, surviving objects move through Survivor spaces, and long-lived objects get promoted to Old Generation. Default collector since Java 9 is G1.">
+    <div class="name">Garbage Collection</div>
+    <div class="definition">GC frees memory held by objects no longer reachable from any GC root. Based on the generational hypothesis that most objects die young. New objects go to Eden, surviving objects move through Survivor spaces, and long-lived objects get promoted to Old Generation. Default collector since Java 9 is G1.</div>
+</div>
+<div class="topic" data-name="Object Lifecycle" data-def="An object goes through allocation in Eden with new keyword, initialization via the constructor chain from Object down, usage by the application, unreachability when all references are gone, optional finalization if finalize is overridden, and finally reclamation by the garbage collector.">
+    <div class="name">Object Lifecycle</div>
+    <div class="definition">An object goes through allocation in Eden with new keyword, initialization via the constructor chain from Object down, usage by the application, unreachability when all references are gone, optional finalization if finalize is overridden, and finally reclamation by the garbage collector.</div>
+</div>
+
+<div class="section-title">Java 8+ Features</div>
+<div class="topic" data-name="Lambda Expressions" data-def="A lambda is an anonymous function, a concise way to represent a single method interface called a functional interface. Captured local variables must be effectively final. The this keyword refers to the enclosing class. Lambdas use invokedynamic bytecode for efficient implementation, not inner classes.">
+    <div class="name">Lambda Expressions</div>
+    <div class="definition">A lambda is an anonymous function, a concise way to represent a single method interface called a functional interface. Captured local variables must be effectively final. The this keyword refers to the enclosing class. Lambdas use invokedynamic bytecode for efficient implementation, not inner classes.</div>
+</div>
+<div class="topic" data-name="Functional Interfaces" data-def="An interface with exactly one abstract method, also known as Single Abstract Method or SAM. It's the target type for lambdas and method references. Key built-in ones include Function for transformation, Predicate for testing conditions, Consumer for side effects, and Supplier for producing values.">
+    <div class="name">Functional Interfaces</div>
+    <div class="definition">An interface with exactly one abstract method, also known as Single Abstract Method or SAM. It's the target type for lambdas and method references. Key built-in ones include Function for transformation, Predicate for testing conditions, Consumer for side effects, and Supplier for producing values.</div>
+</div>
+<div class="topic" data-name="Streams API" data-def="A stream is a sequence of elements supporting aggregate operations in a declarative, functional style. Streams don't store data, they describe a computation pipeline. They use lazy evaluation where intermediate operations do nothing until a terminal operation triggers the pipeline. Streams are single-use.">
+    <div class="name">Streams API</div>
+    <div class="definition">A stream is a sequence of elements supporting aggregate operations in a declarative, functional style. Streams don't store data, they describe a computation pipeline. They use lazy evaluation where intermediate operations do nothing until a terminal operation triggers the pipeline. Streams are single-use.</div>
+</div>
+<div class="topic" data-name="Stream vs Collection" data-def="Collections are for data storage with eager evaluation and can be traversed multiple times. Streams are for data computation with lazy evaluation and can be traversed only once. Collections use external iteration with for-each loops while streams use internal iteration where the API controls traversal.">
+    <div class="name">Stream vs Collection</div>
+    <div class="definition">Collections are for data storage with eager evaluation and can be traversed multiple times. Streams are for data computation with lazy evaluation and can be traversed only once. Collections use external iteration with for-each loops while streams use internal iteration where the API controls traversal.</div>
+</div>
+<div class="topic" data-name="Intermediate vs Terminal Operations" data-def="Intermediate operations return a new Stream and are lazy. They can be stateless like filter and map, or stateful like sorted and distinct. Terminal operations trigger pipeline execution and produce a non-stream result. Short-circuiting operations like findFirst can complete without processing every element.">
+    <div class="name">Intermediate vs Terminal Operations</div>
+    <div class="definition">Intermediate operations return a new Stream and are lazy. They can be stateless like filter and map, or stateful like sorted and distinct. Terminal operations trigger pipeline execution and produce a non-stream result. Short-circuiting operations like findFirst can complete without processing every element.</div>
+</div>
+<div class="topic" data-name="Optional" data-def="A container that may or may not hold a non-null value. Designed to reduce NullPointerException and make nullability explicit in the API. Use as return type where absence is valid. Don't use as fields, method parameters, or in collections. orElseGet is preferred over orElse when the default is expensive.">
+    <div class="name">Optional</div>
+    <div class="definition">A container that may or may not hold a non-null value. Designed to reduce NullPointerException and make nullability explicit in the API. Use as return type where absence is valid. Don't use as fields, method parameters, or in collections. orElseGet is preferred over orElse when the default is expensive.</div>
+</div>
+<div class="topic" data-name="Method References" data-def="Shorthand syntax for lambdas that simply invoke a single method using the double colon operator. Four forms: static method reference like Integer parseInt, bound instance method reference, unbound instance method reference like String length, and constructor reference like ArrayList new.">
+    <div class="name">Method References</div>
+    <div class="definition">Shorthand syntax for lambdas that simply invoke a single method using the double colon operator. Four forms: static method reference like Integer parseInt, bound instance method reference, unbound instance method reference like String length, and constructor reference like ArrayList new.</div>
+</div>
+<div class="topic" data-name="Default and Static Methods in Interface" data-def="Default methods have a body defined using the default keyword, enabling backward-compatible API evolution. Static methods belong to the interface itself and are not inherited. When a class inherits the same default method from multiple interfaces, the class must override and can call either with InterfaceName dot super.">
+    <div class="name">Default & Static Methods in Interface</div>
+    <div class="definition">Default methods have a body defined using the default keyword, enabling backward-compatible API evolution. Static methods belong to the interface itself and are not inherited. When a class inherits the same default method from multiple interfaces, the class must override and can call either with InterfaceName.super.</div>
+</div>
+
+<div class="section-title">Serialization</div>
+<div class="topic" data-name="Serialization and Deserialization" data-def="Serialization converts an object's state into a byte stream for persistence, network transfer, or caching. Deserialization reverses the process. The JVM walks the object graph, serializing each reachable non-transient field. Constructor does NOT run during deserialization. Never deserialize untrusted data.">
+    <div class="name">Serialization & Deserialization</div>
+    <div class="definition">Serialization converts an object's state into a byte stream for persistence, network transfer, or caching. Deserialization reverses the process. The JVM walks the object graph, serializing each reachable non-transient field. Constructor does NOT run during deserialization. Never deserialize untrusted data.</div>
+</div>
+<div class="topic" data-name="Serializable Interface" data-def="A marker interface with no methods signaling to the JVM that instances of this class may be serialized. All non-transient, non-static fields must themselves be serializable. If a superclass is not serializable but a subclass is, the superclass must have a no-arg constructor.">
+    <div class="name">Serializable Interface</div>
+    <div class="definition">A marker interface with no methods signaling to the JVM that instances of this class may be serialized. All non-transient, non-static fields must themselves be serializable. If a superclass is not serializable but a subclass is, the superclass must have a no-arg constructor.</div>
+</div>
+<div class="topic" data-name="transient Keyword" data-def="Marks a field to be excluded from default serialization. Upon deserialization, the field will have its default value: null for objects, 0 for numbers, false for booleans. Common uses include sensitive data like passwords, derived or cached fields, and non-serializable resources like database connections.">
+    <div class="name">transient Keyword</div>
+    <div class="definition">Marks a field to be excluded from default serialization. Upon deserialization, the field will have its default value: null for objects, 0 for numbers, false for booleans. Common uses include sensitive data like passwords, derived or cached fields, and non-serializable resources like database connections.</div>
+</div>
+<div class="topic" data-name="serialVersionUID" data-def="A version identifier for serialized classes. Used to verify that serialized data is compatible with the class definition during deserialization. Without it, any class change causes InvalidClassException. Must be private static final long. Always declare it explicitly.">
+    <div class="name">serialVersionUID</div>
+    <div class="definition">A version identifier for serialized classes. Used to verify that serialized data is compatible with the class definition during deserialization. Without it, any class change causes InvalidClassException. Must be private static final long. Always declare it explicitly.</div>
+</div>
+<div class="topic" data-name="Externalizable" data-def="A sub-interface of Serializable giving the developer full control over the serialization format. Requires implementing writeExternal and readExternal methods. Unlike Serializable, the public no-arg constructor IS called during deserialization. Faster than Serializable because it avoids reflection.">
+    <div class="name">Externalizable</div>
+    <div class="definition">A sub-interface of Serializable giving the developer full control over the serialization format. Requires implementing writeExternal and readExternal methods. Unlike Serializable, the public no-arg constructor IS called during deserialization. Faster than Serializable because it avoids reflection.</div>
+</div>
+
+<div class="section-title">Enum</div>
+<div class="topic" data-name="Enum Basics" data-def="An enum is a special class that represents a fixed, finite set of constants. Each enum value is an instance of the enum type, implicitly public, static, and final. Enums extend java.lang.Enum and cannot extend any other class but can implement interfaces. You cannot instantiate an enum with new.">
+    <div class="name">Enum Basics</div>
+    <div class="definition">An enum is a special class that represents a fixed, finite set of constants. Each enum value is an instance of the enum type, implicitly public, static, and final. Enums extend java.lang.Enum and cannot extend any other class but can implement interfaces. You cannot instantiate an enum with new.</div>
+</div>
+<div class="topic" data-name="Enum vs Constants" data-def="Enums provide type safety where the compiler rejects non-enum values. They are self-documenting, support iteration via values method, and can carry data and behavior. Plain int constants are not type-safe, can clash, print as numbers, and cannot iterate or add behavior.">
+    <div class="name">Enum vs Constants</div>
+    <div class="definition">Enums provide type safety where the compiler rejects non-enum values. They are self-documenting, support iteration via values method, and can carry data and behavior. Plain int constants are not type-safe, can clash, print as numbers, and cannot iterate or add behavior.</div>
+</div>
+<div class="topic" data-name="Enum with Methods and Fields" data-def="Enums can have fields, constructors, and methods, making them essentially full classes with a fixed set of instances. They support constant-specific method bodies for overriding per constant, and can implement interfaces. The Enum Singleton Pattern is the best singleton approach being serialization-safe, reflection-safe, and thread-safe.">
+    <div class="name">Enum with Methods and Fields</div>
+    <div class="definition">Enums can have fields, constructors, and methods, making them essentially full classes with a fixed set of instances. They support constant-specific method bodies for overriding per constant, and can implement interfaces. The Enum Singleton Pattern is the best singleton approach being serialization-safe, reflection-safe, and thread-safe.</div>
+</div>
+
+<div class="section-title">Reflection API</div>
+<div class="topic" data-name="What is Reflection" data-def="Reflection is the ability of a Java program to inspect and modify its own structure at runtime without knowing class names at compile time. Core classes include Class, Method, Field, and Constructor. You can dynamically instantiate objects, invoke methods, and access fields using setAccessible.">
+    <div class="name">What is Reflection</div>
+    <div class="definition">Reflection is the ability of a Java program to inspect and modify its own structure at runtime without knowing class names at compile time. Core classes include Class, Method, Field, and Constructor. You can dynamically instantiate objects, invoke methods, and access fields using setAccessible.</div>
+</div>
+<div class="topic" data-name="Use Cases of Reflection" data-def="Used in frameworks like Spring for dependency injection, Hibernate for ORM mapping, Jackson for JSON serialization, and JUnit for finding test methods. Also used for dynamic proxies in AOP, IDE features like auto-complete, plugin architectures, and testing tools like Mockito.">
+    <div class="name">Use Cases of Reflection</div>
+    <div class="definition">Used in frameworks like Spring for dependency injection, Hibernate for ORM mapping, Jackson for JSON serialization, and JUnit for finding test methods. Also used for dynamic proxies in AOP, IDE features like auto-complete, plugin architectures, and testing tools like Mockito.</div>
+</div>
+<div class="topic" data-name="Performance Impact of Reflection" data-def="Reflection is 10 to 100 times slower than direct method calls due to access checks, method lookup by name, no JIT inlining, boxing of primitives, and varargs array allocation. Mitigate by caching Method and Field objects, calling setAccessible once, and using MethodHandle for new code.">
+    <div class="name">Performance Impact of Reflection</div>
+    <div class="definition">Reflection is 10 to 100 times slower than direct method calls due to access checks, method lookup by name, no JIT inlining, boxing of primitives, and varargs array allocation. Mitigate by caching Method and Field objects, calling setAccessible once, and using MethodHandle for new code.</div>
+</div>
+<div class="topic" data-name="Security Concerns with Reflection" data-def="Reflection can bypass standard access controls, access private fields, modify final fields, and break singletons. Modern safeguards include the Java 9 plus Module System with strong encapsulation where reflection cannot access non-exported package internals even with setAccessible. Avoid reflection unless absolutely necessary.">
+    <div class="name">Security Concerns with Reflection</div>
+    <div class="definition">Reflection can bypass standard access controls, access private fields, modify final fields, and break singletons. Modern safeguards include the Java 9+ Module System with strong encapsulation where reflection cannot access non-exported package internals even with setAccessible. Avoid reflection unless absolutely necessary.</div>
+</div>
+
+<div class="section-title">Annotations</div>
+<div class="topic" data-name="Built-in Annotations" data-def="Override provides compile-time checking of method overrides. Deprecated marks API as outdated with optional since and forRemoval elements. SuppressWarnings tells the compiler to ignore specific warnings. FunctionalInterface enforces the single abstract method rule. SafeVarargs suppresses unchecked warnings for generic varargs.">
+    <div class="name">Built-in Annotations</div>
+    <div class="definition">Override provides compile-time checking of method overrides. Deprecated marks API as outdated with optional since and forRemoval elements. SuppressWarnings tells the compiler to ignore specific warnings. FunctionalInterface enforces the single abstract method rule. SafeVarargs suppresses unchecked warnings for generic varargs.</div>
+</div>
+<div class="topic" data-name="Custom Annotations" data-def="Type declarations you attach as metadata to program elements like classes, methods, and fields. Allowed element types are primitives, String, Class, enums, other annotations, and arrays of these. Meta-annotations include Retention for how long it's retained, Target for what elements can be annotated, Inherited, and Repeatable.">
+    <div class="name">Custom Annotations</div>
+    <div class="definition">Type declarations you attach as metadata to program elements like classes, methods, and fields. Allowed element types are primitives, String, Class, enums, other annotations, and arrays of these. Meta-annotations include Retention for how long it's retained, Target for what elements can be annotated, Inherited, and Repeatable.</div>
+</div>
+<div class="topic" data-name="Runtime vs Compile-time Annotations" data-def="SOURCE retention is discarded after compilation and used by annotation processors like Lombok. CLASS retention is in the dot class file but not loaded at runtime. RUNTIME retention is loaded into the JVM and queryable via reflection, driving most framework magic in Spring, JUnit, JPA, and Jackson.">
+    <div class="name">Runtime vs Compile-time Annotations</div>
+    <div class="definition">SOURCE retention is discarded after compilation and used by annotation processors like Lombok. CLASS retention is in the .class file but not loaded at runtime. RUNTIME retention is loaded into the JVM and queryable via reflection, driving most framework magic in Spring, JUnit, JPA, and Jackson.</div>
+</div>
+
+<div class="section-title">IO & NIO</div>
+<div class="topic" data-name="File Handling" data-def="Java has two file APIs. Legacy java.io.File has limited error handling and returns booleans. Modern java.nio.file introduced in Java 7 uses Path and Files classes with full exception-based error reporting, symbolic link awareness, and file attributes support. Use java.nio.file for new code.">
+    <div class="name">File Handling</div>
+    <div class="definition">Java has two file APIs. Legacy java.io.File has limited error handling and returns booleans. Modern java.nio.file introduced in Java 7 uses Path and Files classes with full exception-based error reporting, symbolic link awareness, and file attributes support. Use java.nio.file for new code.</div>
+</div>
+<div class="topic" data-name="InputStream and OutputStream" data-def="Byte streams are the base abstraction for binary data. Key methods are read and write. FileInputStream and FileOutputStream handle files. BufferedInputStream adds buffering. DataInputStream handles typed data. These streams illustrate the classic decorator pattern where you wrap a basic stream with decorators to add functionality.">
+    <div class="name">InputStream / OutputStream</div>
+    <div class="definition">Byte streams are the base abstraction for binary data. Key methods are read and write. FileInputStream and FileOutputStream handle files. BufferedInputStream adds buffering. DataInputStream handles typed data. These streams illustrate the classic decorator pattern where you wrap a basic stream with decorators to add functionality.</div>
+</div>
+<div class="topic" data-name="Reader and Writer" data-def="Character streams designed for text, handling encoding from bytes to characters automatically. InputStreamReader wraps an InputStream with a charset to produce a Reader. OutputStreamWriter does the reverse. Always specify charset explicitly to avoid portability bugs. Prefer Files.newBufferedReader with UTF-8.">
+    <div class="name">Reader / Writer</div>
+    <div class="definition">Character streams designed for text, handling encoding from bytes to characters automatically. InputStreamReader wraps an InputStream with a charset to produce a Reader. OutputStreamWriter does the reverse. Always specify charset explicitly to avoid portability bugs. Prefer Files.newBufferedReader with UTF-8.</div>
+</div>
+<div class="topic" data-name="Buffered Streams" data-def="Wrap another stream to add an internal buffer, typically 8 kilobytes. Reading and writing in chunks dramatically reduces system calls. BufferedReader adds readLine for line-at-a-time reading. BufferedWriter adds newLine for platform-appropriate line separators. Modern alternative is Files.lines for streaming file lines.">
+    <div class="name">Buffered Streams</div>
+    <div class="definition">Wrap another stream to add an internal buffer, typically 8 kilobytes. Reading and writing in chunks dramatically reduces system calls. BufferedReader adds readLine for line-at-a-time reading. BufferedWriter adds newLine for platform-appropriate line separators. Modern alternative is Files.lines for streaming file lines.</div>
+</div>
+<div class="topic" data-name="NIO Basics" data-def="New IO is buffer-oriented and supports non-blocking operations. Buffers are blocks of memory with position, limit, and capacity. Channels are bidirectional data conduits for files and sockets. Selectors allow one thread to manage many channels. Used by Netty and Tomcat for high-concurrency servers. Memory-mapped files map files directly into memory.">
+    <div class="name">NIO Basics</div>
+    <div class="definition">New IO is buffer-oriented and supports non-blocking operations. Buffers are blocks of memory with position, limit, and capacity. Channels are bidirectional data conduits for files and sockets. Selectors allow one thread to manage many channels. Used by Netty and Tomcat for high-concurrency servers. Memory-mapped files map files directly into memory.</div>
+</div>
+
+<div class="section-title">Generics</div>
+<div class="topic" data-name="Generic Classes and Methods" data-def="Generics parameterize types over other types, giving compile-time type safety and eliminating casts. A generic class uses type parameters like T. The diamond operator in Java 7 plus infers type arguments. Naming conventions include T for Type, E for Element, K and V for Key and Value, and R for Return type.">
+    <div class="name">Generic Classes and Methods</div>
+    <div class="definition">Generics parameterize types over other types, giving compile-time type safety and eliminating casts. A generic class uses type parameters like T. The diamond operator in Java 7+ infers type arguments. Naming conventions include T for Type, E for Element, K and V for Key and Value, and R for Return type.</div>
+</div>
+<div class="topic" data-name="Type Erasure" data-def="Java generics are a compile-time feature. At runtime, all type parameters are erased and replaced with their upper bound or Object if unbounded. This exists for backward compatibility. Consequences include no new T, no generic arrays, no instanceof with parameterized types, and no overloads differing only by generic type.">
+    <div class="name">Type Erasure</div>
+    <div class="definition">Java generics are a compile-time feature. At runtime, all type parameters are erased and replaced with their upper bound or Object if unbounded. This exists for backward compatibility. Consequences include no new T, no generic arrays, no instanceof with parameterized types, and no overloads differing only by generic type.</div>
+</div>
+<div class="topic" data-name="Bounded Types" data-def="Restrict type parameters to specific types or their subtypes using extends. Multiple bounds use type intersection with ampersand, allowing at most one class which must come first plus any number of interfaces. Bounded types let you call specific methods on T. Lower bounds on type parameters do not exist, only on wildcards.">
+    <div class="name">Bounded Types</div>
+    <div class="definition">Restrict type parameters to specific types or their subtypes using extends. Multiple bounds use type intersection with ampersand, allowing at most one class which must come first plus any number of interfaces. Bounded types let you call specific methods on T. Lower bounds on type parameters do not exist, only on wildcards.</div>
+</div>
+<div class="topic" data-name="Wildcards" data-def="Wildcards express flexibility in generic types around variance. Upper bounded question mark extends T means T or any subtype and is a Producer. Lower bounded question mark super T means T or any supertype and is a Consumer. The PECS mnemonic says Producer Extends, Consumer Super. Generics are invariant by default.">
+    <div class="name">Wildcards</div>
+    <div class="definition">Wildcards express flexibility in generic types around variance. Upper bounded ? extends T means T or any subtype and is a Producer. Lower bounded ? super T means T or any supertype and is a Consumer. The PECS mnemonic says Producer Extends, Consumer Super. Generics are invariant by default.</div>
+</div>
+
+<div class="section-title">Immutable Objects</div>
+<div class="topic" data-name="What Makes a Class Immutable" data-def="An immutable object's state cannot change after construction. Rules: no setters or state-modifying methods, make the class final, make all fields final and private, and make defensive copies of mutable internal state in both constructor and getters. Do validation after the defensive copy to prevent time-of-check to time-of-use bugs.">
+    <div class="name">What Makes a Class Immutable</div>
+    <div class="definition">An immutable object's state cannot change after construction. Rules: no setters or state-modifying methods, make the class final, make all fields final and private, and make defensive copies of mutable internal state in both constructor and getters. Do validation after the defensive copy to prevent time-of-check to time-of-use bugs.</div>
+</div>
+<div class="topic" data-name="Benefits of Immutability" data-def="Thread-safety for free since no synchronization is needed. Safe to share and cache since state never changes. Safe as HashMap keys because hashCode is stable. Failure atomicity since the original object remains unchanged on failure. Easier to reason about with no who modified this when debugging. Famous immutable classes include String, all boxed primitives, and java.time types.">
+    <div class="name">Benefits of Immutability</div>
+    <div class="definition">Thread-safety for free since no synchronization is needed. Safe to share and cache since state never changes. Safe as HashMap keys because hashCode is stable. Failure atomicity since the original object remains unchanged on failure. Easier to reason about with no who-modified-this-when debugging. Famous immutable classes include String, all boxed primitives, and java.time types.</div>
+</div>
+
+<div class="section-title">Design Principles</div>
+<div class="topic" data-name="SOLID Principles" data-def="Single Responsibility: a class should have one reason to change. Open Closed: open for extension, closed for modification. Liskov Substitution: subtypes must be substitutable for base types. Interface Segregation: clients should not depend on interfaces they don't use. Dependency Inversion: depend on abstractions, not concretions.">
+    <div class="name">SOLID Principles</div>
+    <div class="definition">Single Responsibility: a class should have one reason to change. Open/Closed: open for extension, closed for modification. Liskov Substitution: subtypes must be substitutable for base types. Interface Segregation: clients should not depend on interfaces they don't use. Dependency Inversion: depend on abstractions, not concretions.</div>
+</div>
+<div class="topic" data-name="DRY and KISS" data-def="DRY means Don't Repeat Yourself. Every piece of knowledge should have a single, unambiguous representation. But premature DRY can be worse than duplication. KISS means Keep It Simple, avoid unnecessary abstractions and over-engineering. Related is YAGNI, You Aren't Gonna Need It: don't add functionality until you actually need it.">
+    <div class="name">DRY, KISS</div>
+    <div class="definition">DRY means Don't Repeat Yourself. Every piece of knowledge should have a single, unambiguous representation. But premature DRY can be worse than duplication. KISS means Keep It Simple, avoid unnecessary abstractions and over-engineering. Related is YAGNI, You Aren't Gonna Need It: don't add functionality until you actually need it.</div>
+</div>
+<div class="topic" data-name="High Cohesion vs Low Coupling" data-def="High cohesion means a module does one thing well. Low coupling means modules interact through minimal, well-defined interfaces. Goal is high cohesion plus low coupling for maintainability, testability, reusability, and readability. Achieved through dependency injection, single responsibility, interfaces, and event-driven patterns.">
+    <div class="name">High Cohesion vs Low Coupling</div>
+    <div class="definition">High cohesion means a module does one thing well. Low coupling means modules interact through minimal, well-defined interfaces. Goal is high cohesion plus low coupling for maintainability, testability, reusability, and readability. Achieved through dependency injection, single responsibility, interfaces, and event-driven patterns.</div>
+</div>
+
+<div class="section-title">Object Class Methods</div>
+<div class="topic" data-name="toString method" data-def="Returns a String representation of the object. Default is ClassName at hexHashCode. Override to include the class's most important fields. Automatically called by println, string concatenation, String.format, debuggers, and loggers. Makes debugging enormously easier.">
+    <div class="name">toString()</div>
+    <div class="definition">Returns a String representation of the object. Default is ClassName@hexHashCode. Override to include the class's most important fields. Automatically called by println, string concatenation, String.format, debuggers, and loggers. Makes debugging enormously easier.</div>
+</div>
+<div class="topic" data-name="equals and hashCode contract" data-def="equals compares logical equality and must be reflexive, symmetric, transitive, and consistent. hashCode generates an integer for bucket placement. The mandatory contract is: if x equals y then their hashCodes must be equal. Violations break HashMap and HashSet. If you override equals, you MUST override hashCode.">
+    <div class="name">equals() & hashCode()</div>
+    <div class="definition">equals compares logical equality and must be reflexive, symmetric, transitive, and consistent. hashCode generates an integer for bucket placement. The mandatory contract is: if x equals y then their hashCodes must be equal. Violations break HashMap and HashSet. If you override equals, you MUST override hashCode.</div>
+</div>
+<div class="topic" data-name="clone method" data-def="Creates a copy of the object. Requires the class to implement Cloneable marker interface, else throws CloneNotSupportedException. super.clone does a shallow copy where object references point to the same sub-objects. For deep copy, manually clone referenced objects. Prefer copy constructors or copy factory methods over clone.">
+    <div class="name">clone()</div>
+    <div class="definition">Creates a copy of the object. Requires the class to implement Cloneable marker interface, else throws CloneNotSupportedException. super.clone does a shallow copy where object references point to the same sub-objects. For deep copy, manually clone referenced objects. Prefer copy constructors or copy factory methods over clone.</div>
+</div>
+<div class="topic" data-name="finalize method" data-def="Called by the garbage collector before reclaiming an object's memory. Deprecated since Java 9 because timing is unpredictable, performance cost is high, and it can resurrect objects. Modern replacements are try-with-resources, AutoCloseable interface, and java.lang.ref.Cleaner introduced in Java 9.">
+    <div class="name">finalize()</div>
+    <div class="definition">Called by the garbage collector before reclaiming an object's memory. Deprecated since Java 9 because timing is unpredictable, performance cost is high, and it can resurrect objects. Modern replacements are try-with-resources, AutoCloseable interface, and java.lang.ref.Cleaner introduced in Java 9.</div>
+</div>
+<div class="topic" data-name="getClass method" data-def="Returns the runtime Class object of this object. Entry point to reflection. It is a final method and cannot be overridden. Difference from dot class literal: String.class is compile-time while obj.getClass is runtime and returns the actual class, which is important for polymorphism.">
+    <div class="name">getClass()</div>
+    <div class="definition">Returns the runtime Class object of this object. Entry point to reflection. It is a final method and cannot be overridden. Difference from .class literal: String.class is compile-time while obj.getClass() is runtime and returns the actual class, which is important for polymorphism.</div>
+</div>
+<div class="topic" data-name="wait, notify, and notifyAll" data-def="Low-level thread coordination methods that must be called while holding the object's monitor inside synchronized blocks. wait releases the monitor and enters the wait set. notify wakes one arbitrary waiting thread. notifyAll wakes all waiting threads. Always use wait in a while loop due to spurious wakeups. Modern alternatives include Lock with Condition and BlockingQueue.">
+    <div class="name">wait(), notify(), notifyAll()</div>
+    <div class="definition">Low-level thread coordination methods that must be called while holding the object's monitor inside synchronized blocks. wait releases the monitor and enters the wait set. notify wakes one arbitrary waiting thread. notifyAll wakes all waiting threads. Always use wait in a while loop due to spurious wakeups. Modern alternatives include Lock with Condition and BlockingQueue.</div>
+</div>
+
+<div class="section-title">Thread Advanced Topics</div>
+<div class="topic" data-name="Executor Framework" data-def="Decouples task submission from thread management. Core interfaces include Executor with execute method, ExecutorService with submit and shutdown, and ScheduledExecutorService for delayed or periodic tasks. Standard factories provide fixed, cached, single-thread, and work-stealing pools. Always shutdown to prevent JVM from hanging.">
+    <div class="name">Executor Framework</div>
+    <div class="definition">Decouples task submission from thread management. Core interfaces include Executor with execute method, ExecutorService with submit and shutdown, and ScheduledExecutorService for delayed or periodic tasks. Standard factories provide fixed, cached, single-thread, and work-stealing pools. Always shutdown to prevent JVM from hanging.</div>
+</div>
+<div class="topic" data-name="Thread Pool" data-def="Reuses a limited set of worker threads for many tasks. ThreadPoolExecutor has configurable core pool size, maximum pool size, keep-alive time, work queue, and rejection policy. Rejection policies include AbortPolicy which throws, CallerRunsPolicy for backpressure, and DiscardPolicy. Size CPU-bound tasks at cores plus one, IO-bound tasks much higher.">
+    <div class="name">Thread Pool</div>
+    <div class="definition">Reuses a limited set of worker threads for many tasks. ThreadPoolExecutor has configurable core pool size, maximum pool size, keep-alive time, work queue, and rejection policy. Rejection policies include AbortPolicy which throws, CallerRunsPolicy for backpressure, and DiscardPolicy. Size CPU-bound tasks at cores plus one, IO-bound tasks much higher.</div>
+</div>
+<div class="topic" data-name="Callable and Future" data-def="Callable returns a value and can throw checked exceptions, unlike Runnable. Future is a handle to an asynchronous computation with get that blocks until done, cancel, isDone, and isCancelled. CompletableFuture in Java 8 adds composition with thenApply, thenCompose, thenCombine, and exceptionally for error handling.">
+    <div class="name">Callable & Future</div>
+    <div class="definition">Callable returns a value and can throw checked exceptions, unlike Runnable. Future is a handle to an asynchronous computation with get that blocks until done, cancel, isDone, and isCancelled. CompletableFuture in Java 8 adds composition with thenApply, thenCompose, thenCombine, and exceptionally for error handling.</div>
+</div>
+<div class="topic" data-name="ForkJoinPool" data-def="A specialized pool for divide-and-conquer parallelism. Each worker thread has its own deque of tasks and steals from other workers when idle. Core classes are RecursiveTask for results and RecursiveAction for void. The common pool is shared by parallelStream and CompletableFuture. One long-running task can starve other operations JVM-wide.">
+    <div class="name">ForkJoinPool</div>
+    <div class="definition">A specialized pool for divide-and-conquer parallelism. Each worker thread has its own deque of tasks and steals from other workers when idle. Core classes are RecursiveTask for results and RecursiveAction for void. The common pool is shared by parallelStream and CompletableFuture. One long-running task can starve other operations JVM-wide.</div>
+</div>
+<div class="topic" data-name="BlockingQueue" data-def="A thread-safe queue that blocks callers when operations can't proceed. put blocks if full, take blocks if empty. Implementations include ArrayBlockingQueue for bounded FIFO, LinkedBlockingQueue for higher throughput, PriorityBlockingQueue for priority ordering, DelayQueue for delayed elements, and SynchronousQueue for direct handoff with zero capacity.">
+    <div class="name">BlockingQueue</div>
+    <div class="definition">A thread-safe queue that blocks callers when operations can't proceed. put blocks if full, take blocks if empty. Implementations include ArrayBlockingQueue for bounded FIFO, LinkedBlockingQueue for higher throughput, PriorityBlockingQueue for priority ordering, DelayQueue for delayed elements, and SynchronousQueue for direct handoff with zero capacity.</div>
+</div>
+<div class="topic" data-name="Producer-Consumer Problem" data-def="One or more producers generate items while one or more consumers process them. The idiomatic solution uses BlockingQueue which handles bounded buffer and coordination automatically, eliminating wait and notify boilerplate. Alternative solutions include wait and notify for educational purposes and Lock with separate Condition objects for more control.">
+    <div class="name">Producer-Consumer Problem</div>
+    <div class="definition">One or more producers generate items while one or more consumers process them. The idiomatic solution uses BlockingQueue which handles bounded buffer and coordination automatically, eliminating wait and notify boilerplate. Alternative solutions include wait/notify for educational purposes and Lock with separate Condition objects for more control.</div>
+</div>
+
+<div class="section-title">Date & Time API</div>
+<div class="topic" data-name="LocalDate and LocalDateTime" data-def="Java 8's java.time package provides clean, immutable, type-safe date and time API. LocalDate is date without time or zone. LocalTime is time only. LocalDateTime is date plus time. ZonedDateTime includes timezone. Instant is nanoseconds since epoch in UTC. All types are immutable and thread-safe with fluent API.">
+    <div class="name">LocalDate, LocalDateTime</div>
+    <div class="definition">Java 8's java.time package provides clean, immutable, type-safe date and time API. LocalDate is date without time or zone. LocalTime is time only. LocalDateTime is date plus time. ZonedDateTime includes timezone. Instant is nanoseconds since epoch in UTC. All types are immutable and thread-safe with fluent API.</div>
+</div>
+<div class="topic" data-name="Old Date vs New API" data-def="Legacy java.util.Date and Calendar are mutable and not thread-safe. Month indexing is 0-based with January as 0. SimpleDateFormat is NOT thread-safe. New java.time is immutable, uses 1-based months, and DateTimeFormatter is thread-safe. For new code use java.time and wrap legacy APIs at boundaries.">
+    <div class="name">Old Date vs New API</div>
+    <div class="definition">Legacy java.util.Date and Calendar are mutable and not thread-safe. Month indexing is 0-based with January as 0. SimpleDateFormat is NOT thread-safe. New java.time is immutable, uses 1-based months, and DateTimeFormatter is thread-safe. For new code use java.time and wrap legacy APIs at boundaries.</div>
+</div>
+<div class="topic" data-name="Time Zones" data-def="ZoneId represents a region like Asia Kolkata and handles daylight saving time. ZoneOffset is a fixed offset from UTC like plus 5 hours 30 minutes. Store timestamps as UTC Instant and convert to user's zone only for display. Be explicit about zone in logs. DST can make times non-existent or ambiguous.">
+    <div class="name">Time Zones</div>
+    <div class="definition">ZoneId represents a region like Asia/Kolkata and handles daylight saving time. ZoneOffset is a fixed offset from UTC like +05:30. Store timestamps as UTC Instant and convert to user's zone only for display. Be explicit about zone in logs. DST can make times non-existent or ambiguous.</div>
+</div>
+
+<div class="section-title">Class Design Concepts</div>
+<div class="topic" data-name="Immutable vs Mutable Classes" data-def="Mutable state can change after construction, suitable for entities with identity like JPA User. Immutable state is fixed at construction, suitable for value objects like Money and Address. Make classes immutable unless there's a concrete reason not to. Use Java records for quick immutable data classes. Use builder pattern for constructing complex immutable objects.">
+    <div class="name">Immutable vs Mutable Classes</div>
+    <div class="definition">Mutable state can change after construction, suitable for entities with identity like JPA User. Immutable state is fixed at construction, suitable for value objects like Money and Address. Make classes immutable unless there's a concrete reason not to. Use Java records for quick immutable data classes. Use builder pattern for constructing complex immutable objects.</div>
+</div>
+<div class="topic" data-name="Singleton Pattern" data-def="A class that guarantees exactly one instance per JVM with global access. Best approach is Enum Singleton which is serialization-safe, reflection-safe, and thread-safe. Bill Pugh Holder uses lazy class loading. Double-Checked Locking requires volatile. Eager Initialization is simple but not lazy. Enum avoids all pitfalls automatically.">
+    <div class="name">Singleton Pattern</div>
+    <div class="definition">A class that guarantees exactly one instance per JVM with global access. Best approach is Enum Singleton which is serialization-safe, reflection-safe, and thread-safe. Bill Pugh Holder uses lazy class loading. Double-Checked Locking requires volatile. Eager Initialization is simple but not lazy. Enum avoids all pitfalls automatically.</div>
+</div>
+<div class="topic" data-name="Factory Pattern" data-def="Encapsulates object creation, returning objects of some type without exposing instantiation logic. Variants include Simple Factory with a static method, Factory Method where subclasses decide, and Abstract Factory for families of related objects. Benefits include hiding concrete types, enabling caching, and simplifying testing with mock factories.">
+    <div class="name">Factory Pattern</div>
+    <div class="definition">Encapsulates object creation, returning objects of some type without exposing instantiation logic. Variants include Simple Factory with a static method, Factory Method where subclasses decide, and Abstract Factory for families of related objects. Benefits include hiding concrete types, enabling caching, and simplifying testing with mock factories.</div>
+</div>
+
+<div class="section-title">Misc Frequently Asked</div>
+<div class="topic" data-name="final, finally, finalize" data-def="Three unrelated things. final is a keyword: final class cannot be subclassed, final method cannot be overridden, final variable cannot be reassigned but for object references the object's state may still mutate. finally is a block that always executes after try-catch for cleanup. finalize is a deprecated method on Object called by GC.">
+    <div class="name">final, finally, finalize</div>
+    <div class="definition">Three unrelated things. final is a keyword: final class cannot be subclassed, final method cannot be overridden, final variable cannot be reassigned but for object references the object's state may still mutate. finally is a block that always executes after try-catch for cleanup. finalize is a deprecated method on Object called by GC.</div>
+</div>
+<div class="topic" data-name="transient vs volatile" data-def="transient is a serialization modifier meaning don't persist this field. Upon deserialization the field has its default value. volatile is a concurrency modifier guaranteeing visibility of writes across threads. volatile does NOT guarantee atomicity of compound operations like count plus plus. Use AtomicInteger for atomic operations.">
+    <div class="name">transient vs volatile</div>
+    <div class="definition">transient is a serialization modifier meaning don't persist this field. Upon deserialization the field has its default value. volatile is a concurrency modifier guaranteeing visibility of writes across threads. volatile does NOT guarantee atomicity of compound operations like count++. Use AtomicInteger for atomic operations.</div>
+</div>
+<div class="topic" data-name="instanceof operator" data-def="Operator that tests whether an object is an instance of a type. Returns false for null without throwing NullPointerException. Parameterized types not allowed like List of String but unbounded wildcard is OK. Java 16 adds pattern matching to eliminate casts. Java 21 adds pattern matching in switch. Overuse is a code smell, prefer polymorphism.">
+    <div class="name">instanceof</div>
+    <div class="definition">Operator that tests whether an object is an instance of a type. Returns false for null without throwing NullPointerException. Parameterized types not allowed like List&lt;String&gt; but unbounded wildcard is OK. Java 16 adds pattern matching to eliminate casts. Java 21 adds pattern matching in switch. Overuse is a code smell, prefer polymorphism.</div>
+</div>
+<div class="topic" data-name="Marker Interfaces" data-def="An interface with no methods or constants used purely to signal that a class has a property. Built-in examples include Serializable, Cloneable, and RandomAccess. Modern alternative is annotations which can target non-class elements and carry parameters. Prefer marker interfaces when you need a type for polymorphism or compile-time checks.">
+    <div class="name">Marker Interfaces</div>
+    <div class="definition">An interface with no methods or constants used purely to signal that a class has a property. Built-in examples include Serializable, Cloneable, and RandomAccess. Modern alternative is annotations which can target non-class elements and carry parameters. Prefer marker interfaces when you need a type for polymorphism or compile-time checks.</div>
+</div>
+
+</div>
+
+<script>
+let isStopped = false;
+let voices = [];
+
+// Load voices (important for Chrome and Android)
+speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+};
+
+async function startReading() {
+    isStopped = false;
+    document.getElementById('status').textContent = 'Reading...';
+
+    const topics = Array.from(document.querySelectorAll(".topic"));
+
+    while (!isStopped) {
+        for (let i = 0; i < topics.length; i++) {
+            if (isStopped) break;
+
+            const topic = topics[i];
+            const name = topic.getAttribute("data-name");
+            const def = topic.getAttribute("data-def");
+
+            // Highlight current topic
+            document.querySelectorAll(".topic").forEach(t => t.classList.remove("active"));
+            topic.classList.add("active");
+            topic.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            // Read topic name
+            await speak(name);
+
+            if (isStopped) break;
+
+            // Pause between heading and definition
+            await delay(500);
+
+            // Read definition
+            await speak(def);
+
+            if (isStopped) break;
+
+            // Longer pause between topics
+            await delay(1000);
+        }
+    }
+}
+
+function speak(text) {
+    return new Promise(resolve => {
+
+        // VERY IMPORTANT for Android
+        speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        // Pick Indian English voice
+        let selectedVoice = voices.find(v => v.lang === "en-IN");
+
+        // Fallback if en-IN not found
+        if (!selectedVoice) {
+            selectedVoice = voices.find(v => v.name.includes("India")) || voices[0];
+        }
+
+        if (selectedVoice) {
+            utterance.voice = selectedVoice;
+        }
+
+        utterance.rate = text.length < 25 ? 0.85 : 0.95;
+        utterance.pitch = 1;
+        utterance.lang = "en-IN";
+
+        utterance.onend = () => {
+            setTimeout(resolve, 120); // slightly safer buffer
+        };
+
+        speechSynthesis.speak(utterance);
+    });
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function stopReading() {
+    isStopped = true;
+    speechSynthesis.cancel();
+    document.getElementById('status').textContent = 'Stopped.';
+    document.querySelectorAll(".topic").forEach(t => t.classList.remove("active"));
+}
+</script>
+</body>
+</html>

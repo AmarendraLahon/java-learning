@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Vocabulary Table</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #4CAF50; color: white; position: sticky; top: 0; }
+tr:nth-child(even) { background-color: #f2f2f2; }
+tr:hover { background-color: #ddd; }
+</style>
+</head>
+<body>
+<h2>Vocabulary Meanings</h2>
+<button onclick="readTable()">🔊 Start Reading</button>
+<button onclick="stopReading()">⏹ Stop</button>
+
+
+
+<script>
+let isStopped = false;
+let voices = [];
+
+// Load voices (important for Chrome)
+speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+};
+
+async function readTable() {
+    isStopped = false;
+
+    const rows = Array.from(document.querySelectorAll("tbody tr"));
+
+    let lastIndex = -1;
+
+    while (!isStopped) {
+
+        // Pick a random index
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * rows.length);
+        } while (rows.length > 1 && randomIndex === lastIndex);
+
+        lastIndex = randomIndex;
+        const row = rows[randomIndex];
+
+        if (isStopped) break;
+
+        // Highlight current row
+        document.querySelectorAll("tr").forEach(r => r.classList.remove("active"));
+        row.classList.add("active");
+
+        const cells = row.querySelectorAll("td");
+        const meaning = cells[1].innerText;
+        const word = cells[2].innerText;
+
+        await speak(meaning);
+        await delay(1000);
+        await speak(word);
+        await delay(800);
+    }
+}
+
+function speak(text) {
+    return new Promise(resolve => {
+
+        // 🛑 VERY IMPORTANT for Android
+        speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        // ✅ Pick Indian English voice
+        let selectedVoice = voices.find(v => v.lang === "en-IN");
+
+        // Fallback if en-IN not found
+        if (!selectedVoice) {
+            selectedVoice = voices.find(v => v.name.includes("India")) || voices[0];
+        }
+
+        if (selectedVoice) {
+            utterance.voice = selectedVoice;
+        }
+
+        utterance.rate = text.length < 25 ? 0.85 : 1;
+        utterance.pitch = 1;
+        utterance.lang = "en-IN";
+
+        utterance.onend = () => {
+            setTimeout(resolve, 120); // slightly safer buffer
+        };
+
+        speechSynthesis.speak(utterance);
+    });
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function stopReading() {
+    isStopped = true;
+    speechSynthesis.cancel();
+}
+</script>
+</body>
+</html>

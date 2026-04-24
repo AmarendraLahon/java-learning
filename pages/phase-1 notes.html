@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Phase-1 Java Notes</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; background: #fafafa; }
+h2 { color: #333; }
+.controls { margin-bottom: 20px; }
+.controls button { padding: 10px 18px; font-size: 16px; margin-right: 8px; cursor: pointer; border: none; border-radius: 6px; }
+.btn-start { background: #4CAF50; color: white; }
+.btn-stop { background: #e53935; color: white; }
+.section-title { background: #1976D2; color: white; padding: 10px 16px; margin: 24px 0 8px 0; border-radius: 6px; font-size: 18px; font-weight: bold; }
+.topic { padding: 10px 16px; margin: 4px 0; border-left: 4px solid #4CAF50; background: white; border-radius: 4px; transition: background 0.3s; }
+.topic.active { background: #E8F5E9; border-left-color: #1976D2; }
+.topic .name { font-weight: bold; color: #2E7D32; font-size: 16px; }
+.topic .definition { color: #555; margin-top: 4px; font-size: 15px; }
+#status { margin-top: 10px; font-style: italic; color: #777; }
+</style>
+</head>
+<body>
+<h2>Java Interview Definitions - Phase 1</h2>
+<div class="controls">
+    <button class="btn-start" onclick="startReading()">Start Reading</button>
+    <button class="btn-stop" onclick="stopReading()">Stop</button>
+</div>
+<div id="status"></div>
+<div id="content">
+
+<div class="section-title">Memory & Object Creation</div>
+<div class="topic" data-name="Stack" data-def="Memory area that stores method calls, local variables, and references. It is thread-specific and follows a LIFO structure.">
+    <div class="name">Stack</div>
+    <div class="definition">Memory area that stores method calls, local variables, and references. It is thread-specific and follows a LIFO structure.</div>
+</div>
+<div class="topic" data-name="Heap" data-def="Shared memory area used for storing objects and instance variables. Managed by the Garbage Collector.">
+    <div class="name">Heap</div>
+    <div class="definition">Shared memory area used for storing objects and instance variables. Managed by the Garbage Collector.</div>
+</div>
+<div class="topic" data-name="Java Object Creation" data-def="Process involving class loading, memory allocation in heap, initialization of variables, constructor execution, and assignment of reference.">
+    <div class="name">Java Object Creation</div>
+    <div class="definition">Process involving class loading, memory allocation in heap, initialization of variables, constructor execution, and assignment of reference.</div>
+</div>
+
+<div class="section-title">Garbage Collection</div>
+<div class="topic" data-name="Minor GC" data-def="Garbage collection process that cleans the Young Generation space, occurring frequently with low pause time.">
+    <div class="name">Minor GC</div>
+    <div class="definition">Garbage collection process that cleans the Young Generation space, occurring frequently with low pause time.</div>
+</div>
+<div class="topic" data-name="Major GC or Full GC" data-def="Garbage collection process that cleans the Old Generation space, less frequent but more expensive in terms of performance.">
+    <div class="name">Major GC (Full GC)</div>
+    <div class="definition">Garbage collection process that cleans the Old Generation space, less frequent but more expensive in terms of performance.</div>
+</div>
+
+<div class="section-title">Hashing & Equality</div>
+<div class="topic" data-name="hashCode" data-def="Method used to generate an integer hash value for an object, primarily for bucket placement in hash-based collections.">
+    <div class="name">hashCode()</div>
+    <div class="definition">Method used to generate an integer hash value for an object, primarily for bucket placement in hash-based collections.</div>
+</div>
+<div class="topic" data-name="equals" data-def="Method used to compare logical equality between two objects.">
+    <div class="name">equals()</div>
+    <div class="definition">Method used to compare logical equality between two objects.</div>
+</div>
+<div class="topic" data-name="Hash Collision" data-def="Condition where multiple keys produce the same hash value and map to the same bucket.">
+    <div class="name">Hash Collision</div>
+    <div class="definition">Condition where multiple keys produce the same hash value and map to the same bucket.</div>
+</div>
+
+<div class="section-title">Collections Core</div>
+<div class="topic" data-name="List" data-def="Ordered collection that allows duplicate elements and maintains insertion order.">
+    <div class="name">List</div>
+    <div class="definition">Ordered collection that allows duplicate elements and maintains insertion order.</div>
+</div>
+<div class="topic" data-name="Set" data-def="Collection that does not allow duplicate elements.">
+    <div class="name">Set</div>
+    <div class="definition">Collection that does not allow duplicate elements.</div>
+</div>
+
+<div class="section-title">List Implementations</div>
+<div class="topic" data-name="ArrayList" data-def="Resizable array implementation of List that provides fast random access but slower insertions and deletions.">
+    <div class="name">ArrayList</div>
+    <div class="definition">Resizable array implementation of List that provides fast random access but slower insertions and deletions.</div>
+</div>
+<div class="topic" data-name="LinkedList" data-def="Doubly linked list implementation that provides efficient insertions and deletions but slower access.">
+    <div class="name">LinkedList</div>
+    <div class="definition">Doubly linked list implementation that provides efficient insertions and deletions but slower access.</div>
+</div>
+
+<div class="section-title">Set Implementations</div>
+<div class="topic" data-name="HashSet" data-def="Set implementation backed by a hash table with no guarantee of order.">
+    <div class="name">HashSet</div>
+    <div class="definition">Set implementation backed by a hash table with no guarantee of order.</div>
+</div>
+<div class="topic" data-name="LinkedHashSet" data-def="HashSet variant that maintains insertion order.">
+    <div class="name">LinkedHashSet</div>
+    <div class="definition">HashSet variant that maintains insertion order.</div>
+</div>
+
+<div class="section-title">Map Implementations</div>
+<div class="topic" data-name="HashMap" data-def="Key-value data structure that allows one null key, is not thread-safe, and provides constant-time operations on average.">
+    <div class="name">HashMap</div>
+    <div class="definition">Key-value data structure that allows one null key, is not thread-safe, and provides constant-time operations on average.</div>
+</div>
+<div class="topic" data-name="Treeification in HashMap" data-def="Process of converting a bucket's linked list into a balanced tree structure when a threshold is exceeded to improve performance.">
+    <div class="name">Treeification in HashMap</div>
+    <div class="definition">Process of converting a bucket's linked list into a balanced tree structure when a threshold is exceeded to improve performance.</div>
+</div>
+<div class="topic" data-name="LinkedHashMap" data-def="HashMap variant that maintains insertion or access order.">
+    <div class="name">LinkedHashMap</div>
+    <div class="definition">HashMap variant that maintains insertion or access order.</div>
+</div>
+
+<div class="section-title">LRU Cache</div>
+<div class="topic" data-name="LRU Cache" data-def="Caching mechanism that removes the least recently used entry when capacity is exceeded.">
+    <div class="name">LRU Cache</div>
+    <div class="definition">Caching mechanism that removes the least recently used entry when capacity is exceeded.</div>
+</div>
+
+<div class="section-title">Time Complexity</div>
+<div class="topic" data-name="Time Complexity" data-def="Measure of algorithm performance in terms of input size, expressed using Big-O notation.">
+    <div class="name">Time Complexity</div>
+    <div class="definition">Measure of algorithm performance in terms of input size, expressed using Big-O notation.</div>
+</div>
+
+<div class="section-title">Concurrency Collections</div>
+<div class="topic" data-name="ConcurrentHashMap" data-def="Thread-safe map designed for high concurrency using internal partitioning or non-blocking techniques.">
+    <div class="name">ConcurrentHashMap</div>
+    <div class="definition">Thread-safe map designed for high concurrency using internal partitioning or non-blocking techniques.</div>
+</div>
+<div class="topic" data-name="SynchronizedMap" data-def="Thread-safe wrapper over a map where all operations are synchronized on a single lock.">
+    <div class="name">SynchronizedMap</div>
+    <div class="definition">Thread-safe wrapper over a map where all operations are synchronized on a single lock.</div>
+</div>
+
+<div class="section-title">Iteration Behavior</div>
+<div class="topic" data-name="Fail-Fast" data-def="Iterator behavior that throws an exception if the collection is structurally modified during iteration.">
+    <div class="name">Fail-Fast</div>
+    <div class="definition">Iterator behavior that throws an exception if the collection is structurally modified during iteration.</div>
+</div>
+<div class="topic" data-name="Fail-Safe" data-def="Iterator behavior that operates on a copy of the collection and does not throw exceptions on modification.">
+    <div class="name">Fail-Safe</div>
+    <div class="definition">Iterator behavior that operates on a copy of the collection and does not throw exceptions on modification.</div>
+</div>
+<div class="topic" data-name="CopyOnWriteArrayList" data-def="Thread-safe list where modifications result in a new copy, ensuring safe iteration.">
+    <div class="name">CopyOnWriteArrayList</div>
+    <div class="definition">Thread-safe list where modifications result in a new copy, ensuring safe iteration.</div>
+</div>
+
+<div class="section-title">Memory Management</div>
+<div class="topic" data-name="Memory Leak in Java" data-def="Situation where objects are no longer needed but remain referenced, preventing garbage collection.">
+    <div class="name">Memory Leak in Java</div>
+    <div class="definition">Situation where objects are no longer needed but remain referenced, preventing garbage collection.</div>
+</div>
+
+<div class="section-title">Sorting & Comparison</div>
+<div class="topic" data-name="Comparable" data-def="Interface that defines natural ordering of objects through a single comparison method.">
+    <div class="name">Comparable</div>
+    <div class="definition">Interface that defines natural ordering of objects through a single comparison method.</div>
+</div>
+<div class="topic" data-name="Comparator" data-def="Interface used to define custom ordering separate from the object's natural ordering.">
+    <div class="name">Comparator</div>
+    <div class="definition">Interface used to define custom ordering separate from the object's natural ordering.</div>
+</div>
+<div class="topic" data-name="compareTo" data-def="Method used for natural ordering comparison between objects.">
+    <div class="name">compareTo()</div>
+    <div class="definition">Method used for natural ordering comparison between objects.</div>
+</div>
+
+<div class="section-title">String Handling</div>
+<div class="topic" data-name="String" data-def="Immutable sequence of characters stored in a special memory pool.">
+    <div class="name">String</div>
+    <div class="definition">Immutable sequence of characters stored in a special memory pool.</div>
+</div>
+<div class="topic" data-name="String Pool" data-def="Memory area that stores unique string literals to optimize memory usage.">
+    <div class="name">String Pool</div>
+    <div class="definition">Memory area that stores unique string literals to optimize memory usage.</div>
+</div>
+<div class="topic" data-name="StringBuilder" data-def="Mutable sequence of characters used for efficient string manipulation.">
+    <div class="name">StringBuilder</div>
+    <div class="definition">Mutable sequence of characters used for efficient string manipulation.</div>
+</div>
+
+<div class="section-title">Wrapper Classes</div>
+<div class="topic" data-name="Wrapper Class" data-def="Object representation of primitive data types.">
+    <div class="name">Wrapper Class</div>
+    <div class="definition">Object representation of primitive data types.</div>
+</div>
+<div class="topic" data-name="Autoboxing" data-def="Automatic conversion of primitive types to their corresponding wrapper objects.">
+    <div class="name">Autoboxing</div>
+    <div class="definition">Automatic conversion of primitive types to their corresponding wrapper objects.</div>
+</div>
+<div class="topic" data-name="Unboxing" data-def="Automatic conversion of wrapper objects to primitive types.">
+    <div class="name">Unboxing</div>
+    <div class="definition">Automatic conversion of wrapper objects to primitive types.</div>
+</div>
+
+<div class="section-title">OOP Concepts</div>
+<div class="topic" data-name="Abstraction" data-def="Concept of hiding implementation details and exposing only essential functionality.">
+    <div class="name">Abstraction</div>
+    <div class="definition">Concept of hiding implementation details and exposing only essential functionality.</div>
+</div>
+<div class="topic" data-name="Encapsulation" data-def="Binding data and methods together while restricting direct access to internal state.">
+    <div class="name">Encapsulation</div>
+    <div class="definition">Binding data and methods together while restricting direct access to internal state.</div>
+</div>
+<div class="topic" data-name="Inheritance" data-def="Mechanism where one class acquires properties and behavior of another.">
+    <div class="name">Inheritance</div>
+    <div class="definition">Mechanism where one class acquires properties and behavior of another.</div>
+</div>
+<div class="topic" data-name="Composition" data-def="Design principle where a class contains objects of other classes to achieve functionality.">
+    <div class="name">Composition</div>
+    <div class="definition">Design principle where a class contains objects of other classes to achieve functionality.</div>
+</div>
+<div class="topic" data-name="IS-A Relationship" data-def="Represents inheritance where one class is a subtype of another.">
+    <div class="name">IS-A Relationship</div>
+    <div class="definition">Represents inheritance where one class is a subtype of another.</div>
+</div>
+<div class="topic" data-name="HAS-A Relationship" data-def="Represents composition where a class contains another class as a member.">
+    <div class="name">HAS-A Relationship</div>
+    <div class="definition">Represents composition where a class contains another class as a member.</div>
+</div>
+<div class="topic" data-name="List vs ArrayList Reference" data-def="Practice of using interface type references for flexibility and loose coupling.">
+    <div class="name">List vs ArrayList Reference</div>
+    <div class="definition">Practice of using interface type references for flexibility and loose coupling.</div>
+</div>
+
+<div class="section-title">Static & Interfaces</div>
+<div class="topic" data-name="Static Method" data-def="Method that belongs to the class rather than an instance and can be accessed without object creation.">
+    <div class="name">Static Method</div>
+    <div class="definition">Method that belongs to the class rather than an instance and can be accessed without object creation.</div>
+</div>
+<div class="topic" data-name="Abstract Class" data-def="Class that may contain abstract and concrete methods and cannot be instantiated.">
+    <div class="name">Abstract Class</div>
+    <div class="definition">Class that may contain abstract and concrete methods and cannot be instantiated.</div>
+</div>
+<div class="topic" data-name="Interface" data-def="Contract that defines abstract methods and optionally default or static methods to be implemented by classes.">
+    <div class="name">Interface</div>
+    <div class="definition">Contract that defines abstract methods (and optionally default/static methods) to be implemented by classes.</div>
+</div>
+
+<div class="section-title">Multithreading Basics</div>
+<div class="topic" data-name="Thread" data-def="Smallest unit of execution within a process.">
+    <div class="name">Thread</div>
+    <div class="definition">Smallest unit of execution within a process.</div>
+</div>
+<div class="topic" data-name="Runnable" data-def="Functional interface representing a task to be executed by a thread.">
+    <div class="name">Runnable</div>
+    <div class="definition">Functional interface representing a task to be executed by a thread.</div>
+</div>
+<div class="topic" data-name="start method" data-def="Method that initiates a new thread and invokes run internally.">
+    <div class="name">start()</div>
+    <div class="definition">Method that initiates a new thread and invokes run() internally.</div>
+</div>
+<div class="topic" data-name="run method" data-def="Method containing the code executed by a thread.">
+    <div class="name">run()</div>
+    <div class="definition">Method containing the code executed by a thread.</div>
+</div>
+<div class="topic" data-name="Thread Execution Order" data-def="Order in which threads execute, determined by the scheduler and not guaranteed.">
+    <div class="name">Thread Execution Order</div>
+    <div class="definition">Order in which threads execute, determined by the scheduler and not guaranteed.</div>
+</div>
+<div class="topic" data-name="Thread-safe" data-def="Property of code that behaves correctly when accessed by multiple threads concurrently.">
+    <div class="name">Thread-safe</div>
+    <div class="definition">Property of code that behaves correctly when accessed by multiple threads concurrently.</div>
+</div>
+<div class="topic" data-name="join method" data-def="Method that causes the current thread to wait until another thread completes execution.">
+    <div class="name">join()</div>
+    <div class="definition">Method that causes the current thread to wait until another thread completes execution.</div>
+</div>
+<div class="topic" data-name="volatile" data-def="Keyword ensuring visibility of variable changes across threads but not guaranteeing atomicity.">
+    <div class="name">volatile</div>
+    <div class="definition">Keyword ensuring visibility of variable changes across threads but not guaranteeing atomicity.</div>
+</div>
+
+</div>
+
+<script>
+let isStopped = false;
+let voices = [];
+
+// Load voices (important for Chrome and Android)
+speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+};
+
+async function startReading() {
+    isStopped = false;
+    document.getElementById('status').textContent = 'Reading...';
+
+    const topics = Array.from(document.querySelectorAll(".topic"));
+
+    while (!isStopped) {
+        for (let i = 0; i < topics.length; i++) {
+            if (isStopped) break;
+
+            const topic = topics[i];
+            const name = topic.getAttribute("data-name");
+            const def = topic.getAttribute("data-def");
+
+            // Highlight current topic
+            document.querySelectorAll(".topic").forEach(t => t.classList.remove("active"));
+            topic.classList.add("active");
+            topic.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            // Read topic name
+            await speak(name);
+
+            if (isStopped) break;
+
+            // Pause between heading and definition
+            await delay(500);
+
+            // Read definition
+            await speak(def);
+
+            if (isStopped) break;
+
+            // Longer pause between topics
+            await delay(1000);
+        }
+    }
+}
+
+function speak(text) {
+    return new Promise(resolve => {
+
+        // VERY IMPORTANT for Android
+        speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        // Pick Indian English voice
+        let selectedVoice = voices.find(v => v.lang === "en-IN");
+
+        // Fallback if en-IN not found
+        if (!selectedVoice) {
+            selectedVoice = voices.find(v => v.name.includes("India")) || voices[0];
+        }
+
+        if (selectedVoice) {
+            utterance.voice = selectedVoice;
+        }
+
+        utterance.rate = text.length < 25 ? 0.85 : 0.95;
+        utterance.pitch = 1;
+        utterance.lang = "en-IN";
+
+        utterance.onend = () => {
+            setTimeout(resolve, 120); // slightly safer buffer
+        };
+
+        speechSynthesis.speak(utterance);
+    });
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function stopReading() {
+    isStopped = true;
+    speechSynthesis.cancel();
+    document.getElementById('status').textContent = 'Stopped.';
+    document.querySelectorAll(".topic").forEach(t => t.classList.remove("active"));
+}
+</script>
+</body>
+</html>
